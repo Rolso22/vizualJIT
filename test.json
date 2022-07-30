@@ -1,0 +1,167 @@
+{
+    "body": [
+        {
+            "ast_type": "Import",
+            "names": [
+                {
+                    "name": "json",
+                    "asname": null
+                }
+            ]
+        },
+        {
+            "ast_type": "FunctionDef",
+            "name": "func1",
+            "args": {
+                "arguments": [
+                    "json_str",
+                    "filter_value"
+                ],
+                "defaults": []
+            },
+            "body": [
+                {
+                    "ast_type": "Assign",
+                    "targets": [
+                        {
+                            "ast_type": "Name",
+                            "id": "res",
+                            "ctx": "Store"
+                        }
+                    ],
+                    "value": {
+                        "ast_type": "Dict",
+                        "keys": [],
+                        "values": []
+                    }
+                },
+                {
+                    "ast_type": "For",
+                    "target": {
+                            "ast_type": "Tuple",
+                            "elts": [
+                                {
+                                    "ast_type": "Name",
+                                    "id": "k",
+                                    "ctx": "Store"
+                                },
+                                {
+                                    "ast_type": "Name",
+                                    "id": "v",
+                                    "ctx": "Store"
+                                }
+                            ],
+                            "ctx": "Store"
+                    },
+                    "iter": {
+                            "ast_type": "Call",
+                            "func": {
+                                    "ast_type": "Attribute",
+                                    "value": {
+                                            "ast_type": "Call",
+                                            "func": {
+                                                    "ast_type": "Attribute",
+                                                    "value": {
+                                                        "ast_type": "Name",
+                                                        "id": "json",
+                                                        "ctx": "Load"
+                                                    },
+                                                "attr": "loads",
+                                                "ctx": "Load"
+                                            },
+                                            "args": [
+                                                {
+                                                    "ast_type": "Name",
+                                                    "id": "json_str",
+                                                    "ctx": "Load"
+                                                }
+                                            ],
+                                            "keywords": []
+                                    },
+                                    "attr": "items",
+                                    "ctx": "Load"
+                            },
+                            "args": [],
+                            "keywords": []
+                    },
+                    "body": [
+                        {
+                            "ast_type": "If",
+                            "test": {
+                                "ast_type": "Compare",
+                                "left": {
+                                    "ast_type": "Name",
+                                    "id": "v",
+                                    "ctx": "Load"
+                                },
+                                "ops": [
+                                    "Eq"
+                                ],
+                                "comparators": [
+                                    {
+                                        "ast_type": "Name",
+                                        "id": "filter_value",
+                                        "ctx": "Load"
+                                    }
+                                ]
+                            },
+                            "body": [
+                                {
+                                    "ast_type": "Assign",
+                                    "targets": [
+                                        {
+                                            "ast_type": "Subscript",
+                                            "value": {
+                                                "ast_type": "Name",
+                                                "id": "res",
+                                                "ctx": "Load"
+                                            },
+                                            "slice": {
+                                                "ast_type": "Name",
+                                                "id": "k",
+                                                "ctx": "Load"
+                                            },
+                                            "ctx": "Store"
+                                        }
+                                    ],
+                                    "value": {
+                                        "ast_type": "Name",
+                                        "id": "v",
+                                        "ctx": "Load"
+                                    }
+                                }
+                            ],
+                            "orelse": []
+                        }
+                    ],
+                    "orelse": []
+                },
+                {
+                    "ast_type": "Return",
+                    "value": {
+                        "ast_type": "Call",
+                        "func": {
+                            "ast_type": "Attribute",
+                            "value": {
+                                "ast_type": "Name",
+                                "id": "json",
+                                "ctx": "Load"
+                            },
+                            "attr": "dumps",
+                            "ctx": "Load"
+                        },
+                        "args": [
+                            {
+                                "ast_type": "Name",
+                                "id": "res",
+                                "ctx": "Load"
+                            }
+                        ],
+                        "keywords": []
+                    }
+                }
+            ],
+            "decorator_list": []
+        }
+    ]
+}
