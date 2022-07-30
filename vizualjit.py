@@ -1,7 +1,9 @@
-import ast
 import types
 from parser import *
 import json
+
+# ----------------------------------------------------------
+# experiments zone
 
 str2 = '''
 import json, ast
@@ -22,10 +24,10 @@ if (x < 6 and y > 2) or y == 2 or x == 5:
 '''
 
 code = ast.parse(str1)
-print(ast.dump(code, indent=3))
-print()
-print()
-print()
+# print(ast.dump(code, indent=3))
+# print()
+# print()
+# print()
 
 # ------------------------------------------------------------
 
@@ -34,7 +36,7 @@ with open("test.json", "r") as fp:
 
 parser = Parser(json.loads(ast_json))
 tree = parser.parse()
-print(ast.dump(tree, indent=3, include_attributes=False))
+# print(ast.dump(tree, indent=3, include_attributes=False))
 comp = compile(tree, '<string>', mode="exec")
 
 my = types.ModuleType(
