@@ -1,0 +1,175 @@
+{
+   "ast_type": "Module",
+   "body": [
+      {
+         "ast_type": "Assign",
+         "targets": [
+            {
+               "ast_type": "Name",
+               "ctx": "Store",
+               "id": "x"
+            }
+         ],
+         "value": {
+            "ast_type": "Constant",
+            "value": 5
+         }
+      },
+      {
+         "ast_type": "Assign",
+         "targets": [
+            {
+               "ast_type": "Name",
+               "ctx": "Store",
+               "id": "y"
+            }
+         ],
+         "value": {
+            "ast_type": "Constant",
+            "value": 2
+         }
+      },
+      {
+         "ast_type": "Assign",
+         "targets": [
+            {
+               "ast_type": "Name",
+               "ctx": "Store",
+               "id": "z"
+            }
+         ],
+         "value": {
+            "ast_type": "BinOp",
+            "left": {
+               "ast_type": "Name",
+               "ctx": "Load",
+               "id": "x"
+            },
+            "op": "Add",
+            "right": {
+               "ast_type": "Constant",
+               "value": 3
+            }
+         }
+      },
+      {
+         "ast_type": "If",
+         "body": [
+            {
+               "ast_type": "Assign",
+               "targets": [
+                  {
+                     "ast_type": "Name",
+                     "ctx": "Store",
+                     "id": "result"
+                  }
+               ],
+               "value": {
+                  "ast_type": "BinOp",
+                  "left": {
+                     "ast_type": "BinOp",
+                     "left": {
+                        "ast_type": "Name",
+                        "ctx": "Load",
+                        "id": "x"
+                     },
+                     "op": "Add",
+                     "right": {
+                        "ast_type": "Name",
+                        "ctx": "Load",
+                        "id": "y"
+                     }
+                  },
+                  "op": "Add",
+                  "right": {
+                     "ast_type": "Name",
+                     "ctx": "Load",
+                     "id": "zz"
+                  }
+               }
+            }
+         ],
+         "orelse": [],
+         "test": {
+            "ast_type": "BoolOp",
+            "op": "Or",
+            "values": [
+               {
+                  "ast_type": "BoolOp",
+                  "op": "And",
+                  "values": [
+                     {
+                        "ast_type": "Compare",
+                        "comparators": [
+                           {
+                              "ast_type": "Constant",
+                              "value": 6
+                           }
+                        ],
+                        "left": {
+                           "ast_type": "Name",
+                           "ctx": "Load",
+                           "id": "x"
+                        },
+                        "ops": [
+                           "Lt"
+                        ]
+                     },
+                     {
+                        "ast_type": "Compare",
+                        "comparators": [
+                           {
+                              "ast_type": "Constant",
+                              "value": 2
+                           }
+                        ],
+                        "left": {
+                           "ast_type": "Name",
+                           "ctx": "Load",
+                           "id": "y"
+                        },
+                        "ops": [
+                           "Gt"
+                        ]
+                     }
+                  ]
+               },
+               {
+                  "ast_type": "Compare",
+                  "comparators": [
+                     {
+                        "ast_type": "Constant",
+                        "value": 2
+                     }
+                  ],
+                  "left": {
+                     "ast_type": "Name",
+                     "ctx": "Load",
+                     "id": "y"
+                  },
+                  "ops": [
+                     "Eq"
+                  ]
+               },
+               {
+                  "ast_type": "Compare",
+                  "comparators": [
+                     {
+                        "ast_type": "Constant",
+                        "value": 5
+                     }
+                  ],
+                  "left": {
+                     "ast_type": "Name",
+                     "ctx": "Load",
+                     "id": "x"
+                  },
+                  "ops": [
+                     "Eq"
+                  ]
+               }
+            ]
+         }
+      }
+   ]
+}

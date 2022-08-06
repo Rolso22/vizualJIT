@@ -7,6 +7,7 @@ class Constants:
     ASNAME = "asname"
     VALUE = "value"
     ARGS = "args"
+    ARG = "arg"
     ARGUMENTS = "arguments"
     TARGET = "target"
     TARGETS = "targets"

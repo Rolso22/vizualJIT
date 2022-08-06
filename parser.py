@@ -3,7 +3,7 @@ import ast
 from constants import *
 
 
-class Parser(Constants):
+class Parser:
 
     def __init__(self, json_ast):
         self.json_ast = json_ast
@@ -27,7 +27,7 @@ class Parser(Constants):
             Constants.LIST: self.list_node,
             Constants.UNARY_OP: self.unary_op_node,
             Constants.BIN_OP: self.bin_op_node,
-            Constants.BOOL_OP: self.bool_op_node
+            Constants.BOOL_OP: self.bool_op_node,
         }
         self.name_ctx = {
             Constants.STORE: ast.Store(),
@@ -104,7 +104,7 @@ class Parser(Constants):
                                decorator_list=[])
 
     def get_arguments_from_function(self, args):
-        return ast.arguments(args=list(map(lambda arg: ast.arg(arg=arg), args[Constants.ARGUMENTS])),
+        return ast.arguments(args=list(map(lambda arg: ast.arg(arg=arg[Constants.ARG]), args[Constants.ARGS])),
                              posonlyargs=[],
                              kwonlyargs=[],
                              kw_defaults=[],

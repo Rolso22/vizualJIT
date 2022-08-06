@@ -4,6 +4,7 @@
             "ast_type": "Import",
             "names": [
                 {
+                    "ast_type": "alias",
                     "name": "json",
                     "asname": null
                 }
@@ -13,9 +14,16 @@
             "ast_type": "FunctionDef",
             "name": "func1",
             "args": {
-                "arguments": [
-                    "json_str",
-                    "filter_value"
+                "ast_type": "arguments",
+                "args": [
+                    {
+                        "ast_type": "arg",
+                        "arg": "json_str"
+                    },
+                    {
+                        "ast_type": "arg",
+                        "arg": "filter_value"
+                    }
                 ],
                 "defaults": []
             },
