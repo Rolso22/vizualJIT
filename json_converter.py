@@ -1,5 +1,6 @@
 from _ast import AST
 
+
 def convert_to_json(node):
     assert isinstance(node, AST)
     to_return = dict()

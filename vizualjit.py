@@ -53,6 +53,7 @@ def compile_ast(file):
     exec(comp, my.__dict__)
     return my
 
+
 def test_module(my):
     json_str = '''{"one": 1, "two": 2, "three": 3, "four": 4}'''
     filter_value = 3
@@ -60,18 +61,8 @@ def test_module(my):
     result = my.func1(json_str, filter_value)
     print(result)
 
+
 # ----------------------------------------------------------
-# experiments zone
-
-str1 = '''
-x = 5
-y = 2
-z = x + 3
-if (x < 6 and y > 2) or y == 2 or x == 5:
-    result = x + y + zz
-'''
-
-# ------------------------------------------------------------
 
 my = compile_ast("test.json")
 test_module(my)
