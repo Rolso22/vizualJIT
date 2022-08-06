@@ -34,6 +34,7 @@ class Constants:
     IMPORT = "Import"
     FUNCTION_DEF = "FunctionDef"
     ASSIGN = "Assign"
+    AUG_ASSIGN = "AugAssign"
     DICT = "Dict"
     RETURN = "Return"
     CALL = "Call"

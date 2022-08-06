@@ -14,6 +14,7 @@ class Parser:
             Constants.IMPORT: self.import_node,
             Constants.FUNCTION_DEF: self.function_def_node,
             Constants.ASSIGN: self.assign_node,
+            Constants.AUG_ASSIGN: self.aug_assign_node,
             Constants.DICT: self.dict_node,
             Constants.RETURN: self.return_node,
             Constants.CALL: self.call_node,
@@ -113,6 +114,11 @@ class Parser:
     def assign_node(self, node):
         return ast.Assign(targets=self.get_targets_from_assign(node[Constants.TARGETS]),
                           value=self.node_analyze(node[Constants.VALUE]))
+
+    def aug_assign_node(self, node):
+        return ast.AugAssign(target=self.node_analyze(node[Constants.TARGET]),
+                             op=self.bin_ops[node[Constants.OP]],
+                             value=self.node_analyze(node[Constants.VALUE]))
 
     def get_targets_from_assign(self, targets):
         return list(map(lambda target: self.node_analyze(target), targets))

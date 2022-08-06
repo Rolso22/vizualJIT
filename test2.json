@@ -2,58 +2,31 @@
    "ast_type": "Module",
    "body": [
       {
-         "ast_type": "Assign",
-         "targets": [
+         "ast_type": "Import",
+         "names": [
             {
-               "ast_type": "Name",
-               "ctx": "Store",
-               "id": "x"
+               "ast_type": "alias",
+               "asname": null,
+               "name": "json"
             }
-         ],
-         "value": {
-            "ast_type": "Constant",
-            "value": 5
-         }
+         ]
       },
       {
-         "ast_type": "Assign",
-         "targets": [
-            {
-               "ast_type": "Name",
-               "ctx": "Store",
-               "id": "y"
-            }
-         ],
-         "value": {
-            "ast_type": "Constant",
-            "value": 2
-         }
-      },
-      {
-         "ast_type": "Assign",
-         "targets": [
-            {
-               "ast_type": "Name",
-               "ctx": "Store",
-               "id": "z"
-            }
-         ],
-         "value": {
-            "ast_type": "BinOp",
-            "left": {
-               "ast_type": "Name",
-               "ctx": "Load",
-               "id": "x"
-            },
-            "op": "Add",
-            "right": {
-               "ast_type": "Constant",
-               "value": 3
-            }
-         }
-      },
-      {
-         "ast_type": "If",
+         "ast_type": "FunctionDef",
+         "args": {
+            "ast_type": "arguments",
+            "args": [
+               {
+                  "ast_type": "arg",
+                  "arg": "json_str"
+               },
+               {
+                  "ast_type": "arg",
+                  "arg": "filter_value"
+               }
+            ],
+            "defaults": []
+         },
          "body": [
             {
                "ast_type": "Assign",
@@ -61,115 +34,189 @@
                   {
                      "ast_type": "Name",
                      "ctx": "Store",
-                     "id": "result"
+                     "id": "res"
                   }
                ],
                "value": {
-                  "ast_type": "BinOp",
-                  "left": {
-                     "ast_type": "BinOp",
-                     "left": {
-                        "ast_type": "Name",
-                        "ctx": "Load",
-                        "id": "x"
-                     },
+                  "ast_type": "Dict",
+                  "keys": [],
+                  "values": []
+               }
+            },
+            {
+               "ast_type": "Assign",
+               "targets": [
+                  {
+                     "ast_type": "Name",
+                     "ctx": "Store",
+                     "id": "count"
+                  }
+               ],
+               "value": {
+                  "ast_type": "Constant",
+                  "value": 0
+               }
+            },
+            {
+               "ast_type": "For",
+               "body": [
+                  {
+                     "ast_type": "AugAssign",
                      "op": "Add",
-                     "right": {
+                     "target": {
                         "ast_type": "Name",
-                        "ctx": "Load",
-                        "id": "y"
+                        "ctx": "Store",
+                        "id": "count"
+                     },
+                     "value": {
+                        "ast_type": "Constant",
+                        "value": 1
                      }
                   },
-                  "op": "Add",
-                  "right": {
+                  {
+                     "ast_type": "If",
+                     "body": [
+                        {
+                           "ast_type": "Assign",
+                           "targets": [
+                              {
+                                 "ast_type": "Subscript",
+                                 "ctx": "Store",
+                                 "slice": {
+                                    "ast_type": "Name",
+                                    "ctx": "Load",
+                                    "id": "k"
+                                 },
+                                 "value": {
+                                    "ast_type": "Name",
+                                    "ctx": "Load",
+                                    "id": "res"
+                                 }
+                              }
+                           ],
+                           "value": {
+                              "ast_type": "Name",
+                              "ctx": "Load",
+                              "id": "v"
+                           }
+                        }
+                     ],
+                     "orelse": [],
+                     "test": {
+                        "ast_type": "Compare",
+                        "comparators": [
+                           {
+                              "ast_type": "Name",
+                              "ctx": "Load",
+                              "id": "filter_value"
+                           }
+                        ],
+                        "left": {
+                           "ast_type": "Name",
+                           "ctx": "Load",
+                           "id": "v"
+                        },
+                        "ops": [
+                           "Eq"
+                        ]
+                     }
+                  }
+               ],
+               "iter": {
+                  "ast_type": "Call",
+                  "args": [],
+                  "func": {
+                     "ast_type": "Attribute",
+                     "attr": "items",
+                     "ctx": "Load",
+                     "value": {
+                        "ast_type": "Call",
+                        "args": [
+                           {
+                              "ast_type": "Name",
+                              "ctx": "Load",
+                              "id": "json_str"
+                           }
+                        ],
+                        "func": {
+                           "ast_type": "Attribute",
+                           "attr": "loads",
+                           "ctx": "Load",
+                           "value": {
+                              "ast_type": "Name",
+                              "ctx": "Load",
+                              "id": "json"
+                           }
+                        },
+                        "keywords": []
+                     }
+                  },
+                  "keywords": []
+               },
+               "orelse": [],
+               "target": {
+                  "ast_type": "Tuple",
+                  "ctx": "Store",
+                  "elts": [
+                     {
+                        "ast_type": "Name",
+                        "ctx": "Store",
+                        "id": "k"
+                     },
+                     {
+                        "ast_type": "Name",
+                        "ctx": "Store",
+                        "id": "v"
+                     }
+                  ]
+               }
+            },
+            {
+               "ast_type": "Expr",
+               "value": {
+                  "ast_type": "Call",
+                  "args": [
+                     {
+                        "ast_type": "Name",
+                        "ctx": "Load",
+                        "id": "count"
+                     }
+                  ],
+                  "func": {
                      "ast_type": "Name",
                      "ctx": "Load",
-                     "id": "zz"
-                  }
+                     "id": "print"
+                  },
+                  "keywords": []
+               }
+            },
+            {
+               "ast_type": "Return",
+               "value": {
+                  "ast_type": "Call",
+                  "args": [
+                     {
+                        "ast_type": "Name",
+                        "ctx": "Load",
+                        "id": "res"
+                     }
+                  ],
+                  "func": {
+                     "ast_type": "Attribute",
+                     "attr": "dumps",
+                     "ctx": "Load",
+                     "value": {
+                        "ast_type": "Name",
+                        "ctx": "Load",
+                        "id": "json"
+                     }
+                  },
+                  "keywords": []
                }
             }
          ],
-         "orelse": [],
-         "test": {
-            "ast_type": "BoolOp",
-            "op": "Or",
-            "values": [
-               {
-                  "ast_type": "BoolOp",
-                  "op": "And",
-                  "values": [
-                     {
-                        "ast_type": "Compare",
-                        "comparators": [
-                           {
-                              "ast_type": "Constant",
-                              "value": 6
-                           }
-                        ],
-                        "left": {
-                           "ast_type": "Name",
-                           "ctx": "Load",
-                           "id": "x"
-                        },
-                        "ops": [
-                           "Lt"
-                        ]
-                     },
-                     {
-                        "ast_type": "Compare",
-                        "comparators": [
-                           {
-                              "ast_type": "Constant",
-                              "value": 2
-                           }
-                        ],
-                        "left": {
-                           "ast_type": "Name",
-                           "ctx": "Load",
-                           "id": "y"
-                        },
-                        "ops": [
-                           "Gt"
-                        ]
-                     }
-                  ]
-               },
-               {
-                  "ast_type": "Compare",
-                  "comparators": [
-                     {
-                        "ast_type": "Constant",
-                        "value": 2
-                     }
-                  ],
-                  "left": {
-                     "ast_type": "Name",
-                     "ctx": "Load",
-                     "id": "y"
-                  },
-                  "ops": [
-                     "Eq"
-                  ]
-               },
-               {
-                  "ast_type": "Compare",
-                  "comparators": [
-                     {
-                        "ast_type": "Constant",
-                        "value": 5
-                     }
-                  ],
-                  "left": {
-                     "ast_type": "Name",
-                     "ctx": "Load",
-                     "id": "x"
-                  },
-                  "ops": [
-                     "Eq"
-                  ]
-               }
-            ]
-         }
+         "decorator_list": [],
+         "name": "func1"
       }
    ]
 }
