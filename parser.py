@@ -132,11 +132,8 @@ class Parser:
 
     def call_node(self, node):
         return ast.Call(func=self.node_analyze(node[Constants.FUNC]),
-                        args=self.get_name_node(node[Constants.ARGS]),
+                        args=self.get_nodes_from_list(node[Constants.ARGS]),
                         keywords=[])
-
-    def get_name_node(self, args):
-        return list(map(lambda name: self.name_node(name), args))
 
     def attribute_node(self, node):
         return ast.Attribute(value=self.node_analyze(node[Constants.VALUE]),

@@ -17,7 +17,7 @@ def func1(json_str, filter_value):
         count += 1
         if v == filter_value:
             res[k] = v
-    print(count)
+    print("count: " + str(count))
     return json.dumps(res) 
     '''
     code = ast.parse(str2)
@@ -54,7 +54,7 @@ def compile_ast(file):
     return my
 
 def test_module(my):
-    json_str = '''{"1": 1, "2": 2, "3": 3, "4": 4}'''
+    json_str = '''{"one": 1, "two": 2, "three": 3, "four": 4}'''
     filter_value = 3
 
     result = my.func1(json_str, filter_value)
