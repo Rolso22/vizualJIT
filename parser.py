@@ -1,4 +1,3 @@
-import json
 import ast
 from constants import *
 
@@ -95,8 +94,8 @@ class Parser:
                         ctx=self.name_ctx[node[Constants.CTX]])
 
     def import_node(self, node):
-        return ast.Import(names=list(map(lambda name: ast.alias(name=name[Constants.NAME],
-                                                                asname=name[Constants.ASNAME]), node[Constants.NAMES])))
+        return ast.Import(names=[ast.alias(name=name[Constants.NAME],
+                                           asname=name[Constants.ASNAME]) for name in node[Constants.NAMES]])
 
     def function_def_node(self, node):
         return ast.FunctionDef(name=node[Constants.NAME],
@@ -104,12 +103,15 @@ class Parser:
                                body=self.body_parse(node[Constants.BODY]),
                                decorator_list=[])
 
+    def arg_node(self, node):
+        return ast.arg(arg=node[Constants.ARG])
+
     def get_arguments_from_function(self, args):
-        return ast.arguments(args=list(map(lambda arg: ast.arg(arg=arg[Constants.ARG]), args[Constants.ARGS])),
+        return ast.arguments(args=[self.arg_node(arg) for arg in args[Constants.ARGS]],
                              posonlyargs=[],
                              kwonlyargs=[],
                              kw_defaults=[],
-                             defaults=list(map(lambda value: ast.Constant(value=value), args[Constants.DEFAULTS])))
+                             defaults=[ast.Constant(value=value) for value in args[Constants.DEFAULTS]])
 
     def assign_node(self, node):
         return ast.Assign(targets=self.get_targets_from_assign(node[Constants.TARGETS]),
@@ -121,11 +123,11 @@ class Parser:
                              value=self.node_analyze(node[Constants.VALUE]))
 
     def get_targets_from_assign(self, targets):
-        return list(map(lambda target: self.node_analyze(target), targets))
+        return [self.node_analyze(target) for target in targets]
 
     def dict_node(self, node):
-        return ast.Dict(keys=list(map(lambda key: self.node_analyze(key), node[Constants.KEYS])),
-                        values=list(map(lambda value: self.node_analyze(value), node[Constants.VALUES])))
+        return ast.Dict(keys=[self.node_analyze(key) for key in node[Constants.KEYS]],
+                        values=[self.node_analyze(value) for value in node[Constants.VALUES]])
 
     def return_node(self, node):
         return ast.Return(value=self.node_analyze(node[Constants.VALUE]))
@@ -169,7 +171,7 @@ class Parser:
                           values=self.get_nodes_from_list(node[Constants.VALUES]))
 
     def get_comparison_ops(self, ops):
-        return list(map(lambda op: self.comparison_ops[op], ops))
+        return [self.comparison_ops[op] for op in ops]
 
     def for_node(self, node):
         return ast.For(target=self.node_analyze(node[Constants.TARGET]),
@@ -182,7 +184,7 @@ class Parser:
                          ctx=self.name_ctx[node[Constants.CTX]])
 
     def get_nodes_from_list(self, node_list):
-        return list(map(lambda node: self.node_analyze(node), node_list))
+        return [self.node_analyze(node) for node in node_list]
 
     def expr_node(self, node):
         return ast.Expr(value=self.node_analyze(node[Constants.VALUE]))
@@ -193,5 +195,3 @@ class Parser:
 
     def set_node(self, node):
         return ast.Set(elts=self.get_nodes_from_list(node[Constants.ELTS]))
-
-

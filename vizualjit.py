@@ -7,6 +7,10 @@ from parser import Parser
 
 
 def change_code():
+    str1 = '''
+def f(x, y):
+    return x * y
+    '''
     str2 = '''
 import json
 
@@ -18,7 +22,7 @@ def func1(json_str, filter_value):
         if v == filter_value:
             res[k] = v
     print("count: " + str(count))
-    return json.dumps(res) 
+    return json.dumps(res)
     '''
     code = ast.parse(str2)
     # print(ast.dump(code, indent=3, include_attributes=False))
@@ -26,7 +30,7 @@ def func1(json_str, filter_value):
     print()
 
     json_ast = convert_to_json(code)
-    # print(json.dumps(json_ast, indent=3))
+    print(json.dumps(json_ast, indent=3))
     with open("test2.json", "w") as fp:
         fp.write(json.dumps(json_ast, indent=3))
 
